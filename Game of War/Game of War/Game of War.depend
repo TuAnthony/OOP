@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1549327726 source:c:\users\anthony\desktop\game of war\main.cpp
+	<iostream>
+	<algorithm>
+	"card.cpp"
+
+1549327780 c:\users\anthony\desktop\game of war\card.hpp
+	<iosfwd>
+
+1549327976 c:\users\anthony\desktop\game of war\card.cpp
+	<iostream>
+	<algorithm>
+
+1549327976 source:c:\users\anthony\desktop\game of war\card.cpp
+	<iostream>
+	<algorithm>
+
