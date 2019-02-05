@@ -21,9 +21,9 @@ enum Suit
 class Card
 {
 public:
-    // constructors
-    Card( );            // initialize a card with default values
-    Card(Suit, int);   // initialize a card with given values
+
+    Card( );
+    Card(Suit, int);
 
     int rank;           // holds rank of card
     Suit suit;          // holds suit of card
@@ -115,7 +115,7 @@ Deck::Deck()
 // return one card from the end of the deck otherwise return the ace of spades card
 Card Deck::draw ()
 {
-    if (! isEmpty())
+    if (!isEmpty())
 
         return cards[--topCard];
 
@@ -130,19 +130,19 @@ class Player
 {
     public:
 
-        Player (Deck &);
+        Player(Deck &);
         Card draw( );
         void addPoints(int);
         int  score();
         void replaceCard(Deck &);
 
     private:
-        Card  myCards[3];
-        int   myScore;
-        int   removedCard;
+        Card myCards[3];
+        int  myScore;
+        int  removedCard;
 };
 
-// initialize the data fields for a player
+//initialize the data fields for a player
 Player::Player(Deck & aDeck)
 {
     myScore = 0;
@@ -153,7 +153,7 @@ Player::Player(Deck & aDeck)
     removedCard = 0;
 }
 
-Card Player::draw( )
+Card Player::draw()
 // return a random card from our hand
 {
     removedCard = randomizer(3);
@@ -161,13 +161,13 @@ Card Player::draw( )
 }
 
 // add the given number of points to the current score
-void Player::addPoints (int howMany)
+void Player::addPoints (int howMuch)
 {
-    myScore += howMany;
+    myScore += howMuch;
 }
 
 // return the current score
-int Player::score( )
+int Player::score()
 {
     return myScore;
 }
@@ -180,13 +180,14 @@ void Player::replaceCard (Deck & aDeck)
 
 int main()
 {
-    Deck deck; // create and shuffle the deck
+    Deck deck; // creates and shuffle the deck
     deck.shuffle();
 
-    Player player1(deck); // create the two
-    Player player2(deck); // players
+    //creates the two players
+    Player player1(deck);
+    Player player2(deck);
 
-    // play until deck is empty
+    // plays until the deck is empty
     while (!deck.isEmpty() )
         {
         Card card1  = player1.draw();
