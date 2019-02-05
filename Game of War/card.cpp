@@ -25,14 +25,12 @@ public:
     Card( );            // initialize a card with default values
     Card(Suit, int);   // initialize a card with given values
 
-    // data fields
-    int rank;           // hold rank of card
-    Suit suit;           // hold suit of card
+    int rank;           // holds rank of card
+    Suit suit;          // holds suit of card
 };
 
+// initialize a new Card, sets default value to ace of spades
 Card::Card( )
-// initialize a new Card
-// default value is the ace of spades
 {
     rank = 1;
     suit = Spades;
@@ -45,10 +43,9 @@ Card::Card(Suit s, int r)
     suit = s;
 }
 
-std::ostream & operator << (std::ostream & outPut, Card & aCard)
 // output a textual representation of a Card
+std::ostream & operator << (std::ostream & outPut, Card & aCard)
 {
-    // first output rank
     switch (aCard.rank) {
         case 1: outPut << "Ace";   break;
         case 2: outPut << "Jack";  break;
@@ -58,7 +55,6 @@ std::ostream & operator << (std::ostream & outPut, Card & aCard)
         outPut << aCard.rank; break;
     }
 
-    // then output suit
     switch (aCard.suit)
     {
         case Diamonds: outPut << " of Diamonds"; break;
@@ -75,36 +71,35 @@ public:
     unsigned int operator () (unsigned int);
 } randomizer;
 
+//return random integer, converts to unsigned because we got to make it positive and take remainder and put in range
 unsigned int randomInteger::operator () (unsigned int max)
 {
-    // rand return random integer
-    // convert to unsigned to make positive
-    // take remainder to put in range
     unsigned int rval = rand();
     return rval % max;
 }
 
-class Deck {
-public:
-    // constructor
-    Deck ( );
+class Deck
+{
+    public:
+        Deck ( );
 
-    // operations
-    void shuffle ( )
-    {
-        std::random_shuffle (cards, cards+52, randomizer);
-    }
-    bool    isEmpty ( )
-    { return topCard <= 0; }
-    Card    draw ( );
+        void shuffle ( )
+        {
+            std::random_shuffle (cards, cards+52, randomizer);
+        }
+        bool isEmpty ( )
+        {
+            return topCard <= 0;
+        }
+        Card draw ( );
 
-protected:
-    Card    cards[52];
-    int     topCard;
+    private:
+        Card  cards[52];
+        int   topCard;
 };
 
-Deck::Deck ( )
-// initialize a deck by creating all 52 cards
+// initialize the deck by creating all 52 cards
+Deck::Deck()
 {
     topCard = 0;
     for (int i = 1; i <= 13; i++)
@@ -117,8 +112,8 @@ Deck::Deck ( )
     }
 }
 
-Card Deck::draw ( )
 // return one card from the end of the deck otherwise return the ace of spades card
+Card Deck::draw ()
 {
     if (! isEmpty())
 
@@ -134,23 +129,21 @@ Card Deck::draw ( )
 class Player
 {
     public:
-        // constructor
-        Player (Deck &);
 
-        // operations
+        Player (Deck &);
         Card draw( );
         void addPoints(int);
         int  score();
         void replaceCard(Deck &);
 
-    protected:
+    private:
         Card  myCards[3];
         int   myScore;
         int   removedCard;
 };
 
-Player::Player(Deck & aDeck)
 // initialize the data fields for a player
+Player::Player(Deck & aDeck)
 {
     myScore = 0;
     for (int i = 0; i < 3; i++)
@@ -167,20 +160,20 @@ Card Player::draw( )
     return myCards[removedCard];
 }
 
-void Player::addPoints (int howMany)
 // add the given number of points to the current score
+void Player::addPoints (int howMany)
 {
     myScore += howMany;
 }
 
-int Player::score( )
 // return the current score
+int Player::score( )
 {
     return myScore;
 }
 
-void Player::replaceCard (Deck & aDeck)
 // replace last card played with new card
+void Player::replaceCard (Deck & aDeck)
 {
     myCards[removedCard] = aDeck.draw();
 }
