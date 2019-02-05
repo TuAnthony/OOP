@@ -10,8 +10,6 @@
 #include <iostream>
 #include <algorithm>
 
-using namespace std;
-
 enum Suit
 {
     Diamonds,
@@ -47,7 +45,7 @@ Card::Card(Suit s, int r)
     suit = s;
 }
 
-ostream & operator << (ostream & outPut, Card & aCard)
+std::ostream & operator << (std::ostream & outPut, Card & aCard)
 // output a textual representation of a Card
 {
     // first output rank
@@ -92,8 +90,10 @@ public:
     Deck ( );
 
     // operations
-    void    shuffle ( )
-    { random_shuffle (cards, cards+52, randomizer); }
+    void shuffle ( )
+    {
+        std::random_shuffle (cards, cards+52, randomizer);
+    }
     bool    isEmpty ( )
     { return topCard <= 0; }
     Card    draw ( );
