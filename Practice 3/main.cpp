@@ -10,7 +10,7 @@ int main()
 {
     Game run;
 
-    run.gameOfWar(1);
+    run.warGame(1);
 
     return 0;
 }

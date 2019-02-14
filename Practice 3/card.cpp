@@ -61,7 +61,7 @@ std::ostream& operator<<(std::ostream& out, Card c)
 
 //Function is part of game class where it takes an integer so that it can be called inside main and also returns void
 //also took this code from the given code in class that was originally in main
-void Game::gameOfWar(int trial)
+void Game::warGame(int trial)
 {
     //Declare counters for Player 1 and Player 2
     Player1 = 0;

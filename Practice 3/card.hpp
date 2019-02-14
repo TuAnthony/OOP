@@ -30,51 +30,48 @@ enum Rank {
 
 class Card
 {
-public:
-  Card(Rank r, Suit s)
-    : bits((unsigned)s << 4 | (unsigned)r)
-    { }
+    public:
 
-  // Returns the rank. The "const" guarantees
-  // that the function does not modify the data
-  // members of the class (or call any other
-  // member function that does).
-  //
-  // This is an accessor function, or getter, or
-  // observer.
-  Rank get_rank() const {
-    return (Rank) (0b001111 & bits); // 0xf & bits
-    }
+        // Returns the rank. The "const" guarantees
+        // that the function does not modify the data
+        // members of the class (or call any other
+        // member function that does).
+        // This is an accessor function, or getter, or
+        // observer.
+        Card(Rank r, Suit s) : bits((unsigned)s << 4 | (unsigned)r) { } //Casting for unsigned integers
+        Rank getRank() const { return(Rank) (0b00001111 & bits); } //LSB of 8-bit number
+        Suit getSuit() const { return(Suit) ((0b11110000 & bits) >> 4); } //MSB of 8-bit number
+        bool operator==(Card c) { return bits == c.bits; }  //Overload operators with bits
+        bool operator!=(Card c) { return !(bits == c.bits); }
+        friend bool operator<(Card a, Card b) { return a.getRank() < b.getRank(); }
+        friend bool operator>(Card a, Card b) { return b.getRank() < a.getRank(); }
+        friend bool operator<=(Card a, Card b) { return !(b.getRank() < a.getRank()); }
+        friend bool operator>=(Card a, Card b) { return !(a.getRank() < b.getRank()); }
 
-  // Same as above.
-  Suit get_suit() const {
-        return (Suit)((0b110000 & bits) >> 4);
-    }
-
-  bool operator==(Card c) const {
-        return bits == c.bits;
-    }
-
-    // This friend function is not a member of class, but has access to private members of the class that it is friends with
-    friend bool operator==(Card a, Card b)
-    {
-        return a.bits == b.bits;
-    }
-
-
-private:
-    unsigned char bits;
+    private:
+        Rank rank;
+        Suit suit;
+        unsigned char bits;
 };
 
-
-// This makes sure that when two cards are equal they have the same rank and suit
-inline bool operator==(Card a, Card b)
+//Game class containing players and game function
+class Game
 {
-    return a.bits == b.bits;
-}
+    public:
+        Game() = default;
+        void warGame(int);
 
-// This is the not equal version when they are not equal
-inline bool operator!=(Card a, Card b)
+    private:
+        int Player1, Player2;
+};
+
+struct Deck : std::deque<Card>
 {
-    return !(a == b);
-}
+    using std::deque<Card>::deque;
+};
+
+//Overloads the ostream operators
+std::ostream& operator<<(std::ostream& out, Suit s);
+std::ostream& operator<<(std::ostream& out, Rank r);
+std::ostream& operator<<(std::ostream& out, Card c);
+std::ostream& operator<<(std::ostream& out, Deck const& d);
