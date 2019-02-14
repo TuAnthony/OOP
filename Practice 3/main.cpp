@@ -4,7 +4,7 @@
 #include <iostream>
 #include <random>
 
-int main(int argc, char* argv[]) 
+int main(int argc, char* argv[])
 {
   Deck d {
     {Ace, Spades},
@@ -65,19 +65,6 @@ int main(int argc, char* argv[])
 
     // ...
   };
-
-  std::cout << d << '\n';
-
-  std::random_device rng;
-  std::minstd_rand prng(rng());
-
-  std::shuffle(d.begin(), d.end(), prng);
-
-  std::cout << d << '\n';
-
-  std::sort(d.begin(), d.end());
-
-  std::cout << d << '\n';
 
   return 0;
 }
