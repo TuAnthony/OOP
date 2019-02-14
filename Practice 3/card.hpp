@@ -3,35 +3,37 @@
 #include <deque>
 #include <iosfwd>
 
-
+// Shows the values for each suit of card
 enum Suit {
-  Spades,
-  Clubs,
-  Diamonds,
-  Hearts,
+  Spades,   //00
+  Clubs,    //01
+  Diamonds, //10
+  Hearts,   //11
 };
 
-enum Rank { 
-  Ace,
-  Two,
-  Three,
-  Four,
-  Five,
-  Six,
-  Seven,
-  Eight,
-  Nine,
-  Ten,
-  Jack,
-  Queen,
-  King,
+// Shows the value for each rank of card
+enum Rank {
+  Ace,      //0001
+  Two,      //0010
+  Three,    //0010
+  Four,     //0100
+  Five,     //0101
+  Six,      //0110
+  Seven,    //0111
+  Eight,    //1000
+  Nine,     //1001
+  Ten,      //1010
+  Jack,     //1011
+  Queen,    //1100
+  King,     //1101
 };
 
-class Card {
+class Card
+{
 public:
   Card(Rank r, Suit s)
-    : rank(r), suit(s)
-  { }
+    : bits((unsigned)s << 4 | (unsigned)r)
+    { }
 
   // Returns the rank. The "const" guarantees
   // that the function does not modify the data
@@ -40,34 +42,39 @@ public:
   //
   // This is an accessor function, or getter, or
   // observer.
-  Rank get_rank() const { return rank; }
+  Rank get_rank() const {
+    return (Rank) (0b001111 & bits); // 0xf & bits
+    }
 
   // Same as above.
-  Suit get_suit() const { return suit; }
+  Suit get_suit() const {
+        return (Suit)((0b110000 & bits) >> 4);
+    }
 
-  // Think before you create mutators (setters).
-  // void set_rank(Rank r) { rank = r; }
-  // void set_suit(Suit s) { suit = s; }
+  bool operator==(Card c) const {
+        return bits == c.bits;
+    }
+
+    // This friend function is not a member of class, but has access to private members of the class that it is friends with
+    friend bool operator==(Card a, Card b)
+    {
+        return a.bits == b.bits;
+    }
+
 
 private:
-  Rank rank;
-  Suit suit;
+    unsigned char bits;
 };
 
-bool operator==(Card a, Card b);
-bool operator!=(Card a, Card b);
 
-bool operator<(Card a, Card b);
-bool operator>(Card a, Card b);
-bool operator<=(Card a, Card b);
-bool operator>=(Card a, Card b);
+// This makes sure that when two cards are equal they have the same rank and suit
+inline bool operator==(Card a, Card b)
+{
+    return a.bits == b.bits;
+}
 
-
-struct Deck : std::deque<Card> {
-  using std::deque<Card>::deque;
-};
-
-std::ostream& operator<<(std::ostream& os, Suit s);
-std::ostream& operator<<(std::ostream& os, Rank r);
-std::ostream& operator<<(std::ostream& os, Card c);
-std::ostream& operator<<(std::ostream& os, Deck const& d);
+// This is the not equal version when they are not equal
+inline bool operator!=(Card a, Card b)
+{
+    return !(a == b);
+}
