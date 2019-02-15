@@ -3,7 +3,7 @@
 
 #include <algorithm>
 #include <iostream>
-#include "Cards.hpp"
+#include "card.hpp"
 
 //I have simplified main to make it easier and I have put the original class into card.cpp
 int main()

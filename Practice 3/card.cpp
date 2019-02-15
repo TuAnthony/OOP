@@ -1,4 +1,4 @@
-#include "Cards.hpp"
+#include "card.hpp"
 #include <iostream>
 #include <random>
 
@@ -156,7 +156,7 @@ void Game::warGame(int trial)
             std::cout << "Player 2 wins Round " << index - war + 1 << std::endl;
 
             Player2 += 2;
-        }  /
+        }
         else
         {
             std::cout << "WAR!" << std::endl;
