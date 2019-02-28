@@ -61,7 +61,16 @@ class Card
         friend bool operator>(Card a, Card b) { return b.getRank() < a.getRank(); }
         friend bool operator<=(Card a, Card b) { return !(b.getRank() < a.getRank()); }
         friend bool operator>=(Card a, Card b) { return !(a.getRank() < b.getRank()); }
-
+        Color getColor() const
+        {
+        if(((bits >> 6) & 0b1) == 1)
+            return (Color) ((bits >> 7) & 0b1);
+        else
+            return (Color) - 1;
+        }
+ 
+  
+  
     private:
         Rank rank;
         Suit suit;
@@ -148,6 +157,17 @@ struct Deck : std::deque<Card>
 {
     using std::deque<Card>::deque;
 };
+
+inline std::ostream& operator<<(std::ostream& out, Color color)
+{
+    if(color == Black)
+        out << "Black Joker";
+    else if(color == Red)
+        out << "Red Joker";
+    
+    return out;
+}
+
 
 //Overloads the ostream operators
 std::ostream& operator<<(std::ostream& out, Suit s);
