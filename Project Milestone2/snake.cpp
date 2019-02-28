@@ -1,12 +1,12 @@
 //Anthony Tung
 
 #include <iostream>
-#include "main.cpp"
-
+#include "snake.hpp"
 
 using namespace sf;
 
-void Tick()
+//function allows the snake to move around using coordinates
+void windows::Tick()
 {
   for (int i = num; i > 0; --i) {
     s[i].x = s[i - 1].x;
@@ -40,4 +40,71 @@ void Tick()
   for (int i = 1; i < num; i++)
     if (s[0].x == s[i].x && s[0].y == s[i].y)
       num = i;
+}
+
+//function generates a random number using srand and creates the game window
+void windows::createWindow()
+{
+
+  srand(time(0));
+
+  RenderWindow window(VideoMode(w, h), "Snake Game!");
+
+  Texture t1, t2;
+  t1.loadFromFile("images/white.png");
+  t2.loadFromFile("images/red.png");
+
+  Sprite sprite1(t1);
+  Sprite sprite2(t2);
+
+  Clock clock;
+  float timer = 0, delay = 0.1;
+
+  f.x = 10;
+  f.y = 10;
+
+  while (window.isOpen()) {
+    float time = clock.getElapsedTime().asSeconds();
+    clock.restart();
+    timer += time;
+
+    Event e;
+    while (window.pollEvent(e)) {
+      if (e.type == Event::Closed)
+        window.close();
+    }
+
+    if (Keyboard::isKeyPressed(Keyboard::Left))
+      dir = 1;
+    if (Keyboard::isKeyPressed(Keyboard::Right))
+      dir = 2;
+    if (Keyboard::isKeyPressed(Keyboard::Up))
+      dir = 3;
+    if (Keyboard::isKeyPressed(Keyboard::Down))
+      dir = 0;
+
+    if (timer > delay) {
+      timer = 0;
+      Tick();
+    }
+
+    ////// draw  ///////
+    window.clear();
+
+    for (int i = 0; i < N; i++)
+      for (int j = 0; j < M; j++) {
+        sprite1.setPosition(i * size, j * size);
+        window.draw(sprite1);
+      }
+
+    for (int i = 0; i < num; i++) {
+      sprite2.setPosition(s[i].x * size, s[i].y * size);
+      window.draw(sprite2);
+    }
+
+    sprite2.setPosition(f.x * size, f.y * size);
+    window.draw(sprite2);
+
+    window.display();
+  }
 }

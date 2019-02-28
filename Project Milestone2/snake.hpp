@@ -1,22 +1,26 @@
+//Anthony Tung
+
 #ifndef SNAKE_HPP_INCLUDED
 #define SNAKE_HPP_INCLUDED
 
 
-class window{
-
-    public:
-    int draw;
-    int restart;
-    int timer;
-    Window get_window() const {return w;}
-    Event get_e() const {return e;}
+#include <stdio.h>
+#include "main.cpp"
 
 
-    private:
+class windows{
 
-    Window window;
-    Event e;
+    const int N = 30;
+    const int M = 20;
+    const int size = 16, width = size * N, height = size * M;
+    int dir;
+    int num = 4;
+    float timer = 0
+    float delay = 0.1;
 
+public:
+    void createWindow();
+    void Tick();
 };
 
 
