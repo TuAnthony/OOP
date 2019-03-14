@@ -1,5 +1,5 @@
-#ifndef CARD_H_INCLUDED
-#define CARD_H_INCLUDED
+#ifndef CARD_HPP_INCLUDED
+#define CARD_HPP_INCLUDED
 
 #include <deque>
 #include <iosfwd>
