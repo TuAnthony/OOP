@@ -2,14 +2,23 @@
 
 #include <algorithm>
 #include <iostream>
-#include "card.hpp"
+#include "Cards.hpp"
 
-//I have simplified main to make it easier and I have put the original class into card.cpp
 int main()
 {
-    Game run;
+    //Function prints the card
+    Standard standardCard(Knight, Spades);
+    std::cout << standardCard.getSuit() << "    " << standardCard.getRank() << std::endl;
+    std::cout << standardCard << std::endl;
 
-    run.warGame(1);
+    //Returns the cards color
+    Joker jokerCardBlack(Black), jokerCardRed(Red);
+    std::cout << jokerCardBlack << "    " << jokerCardBlack.getColor() << "    " << jokerCardRed.getColor() << std::endl;
 
+    //Goes into a query if the card is a standard or a joker card
+    PlayingCard cardExampleStandard(StandardKind), cardExampleJoker(JokerKind);
+    std::cout << cardExampleStandard.getKind() << "   " << cardExampleJoker.getKind() << std::endl;
+
+    //End program
     return 0;
 }
