@@ -1,3 +1,5 @@
+//Anthony Tung
+
 #pragma once
 
 #include <cassert>
@@ -13,7 +15,7 @@ enum Suit {
   Hearts,
 };
 
-enum Rank { 
+enum Rank {
   Ace,
   Two,
   Three,
@@ -40,7 +42,7 @@ enum Color {
 struct Card {
   // This is a virtual function. It declares
   // that print is dispatched based on the
-  // dynamic type of this object (I mean the 
+  // dynamic type of this object (I mean the
   // pointer). Called dynamic dispatch.
   //
   // We will eventually call one of the
@@ -51,7 +53,7 @@ struct Card {
   //   throw std::logic_error("you done messed up");
   // }
 
-  // This is a pure virtual function. Also 
+  // This is a pure virtual function. Also
   // called an abstract method.
   virtual void print(std::ostream& os) const = 0;
 
@@ -73,8 +75,7 @@ struct StandardCard : Card {
 
   // This is an override (not an overwrite) of
   // the virtual function in Card.
-  //
-  // Defined in the .cpp file.
+
   void print(std::ostream& os) const override;
 
   // Override.
@@ -90,7 +91,7 @@ struct JokerCard : Card {
   JokerCard(Color c)
     : color(c)
   { }
-  
+
   // An override for jokers.
   void print(std::ostream& os) const override;
 
@@ -98,15 +99,11 @@ struct JokerCard : Card {
   Color get_color() const override {
     return color;
   }
-  
+
   Color color;
 };
 
 
-// DOES NOT WORK.
-struct Deck : std::deque<Card*> {
-  using std::deque<Card*>::deque;
-};
 
 std::ostream& operator<<(std::ostream& os, Suit s);
 std::ostream& operator<<(std::ostream& os, Rank r);
