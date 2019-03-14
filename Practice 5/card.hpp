@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CARD_H_INCLUDED
+#define CARD_H_INCLUDED
 
 #include <deque>
 #include <iosfwd>
@@ -154,3 +155,5 @@ std::ostream& operator<<(std::ostream& out, Suit s);
 std::ostream& operator<<(std::ostream& out, Rank r);
 std::ostream& operator<<(std::ostream& out, Card c);
 std::ostream& operator<<(std::ostream& out, Deck const& d);
+
+#endif
