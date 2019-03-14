@@ -1,114 +1,156 @@
-//Anthony Tung
-
 #pragma once
 
-#include <cassert>
 #include <deque>
 #include <iosfwd>
-#include <stdexcept>
 
-
+// Shows the values for each suit of card
 enum Suit {
-  Spades,
-  Clubs,
-  Diamonds,
-  Hearts,
+  Spades,   //00
+  Clubs,    //01
+  Diamonds, //10
+  Hearts,   //11
 };
 
+// Shows the value for each rank of card
 enum Rank {
-  Ace,
-  Two,
-  Three,
-  Four,
-  Five,
-  Six,
-  Seven,
-  Eight,
-  Nine,
-  Ten,
-  Jack,
-  Queen,
-  King,
+  Ace,      //0001
+  Two,      //0010
+  Three,    //0010
+  Four,     //0100
+  Five,     //0101
+  Six,      //0110
+  Seven,    //0111
+  Eight,    //1000
+  Nine,     //1001
+  Ten,      //1010
+  Jack,     //1011
+  Queen,    //1100
+  King,     //1101
 };
 
-enum Color {
-  Black,
-  Red,
+enum kin {
+
+    Standkind,
+    Jokerkind
+
 };
 
-// Denotes an abstract set values whose
-// concrete values are represented by
-// derived classes.
-struct Card {
-  // This is a virtual function. It declares
-  // that print is dispatched based on the
-  // dynamic type of this object (I mean the
-  // pointer). Called dynamic dispatch.
-  //
-  // We will eventually call one of the
-  // overrides defined below.
+enum color{
 
-  // virtual void print(std::ostream& os) const {
-  //   // assert(false);
-  //   throw std::logic_error("you done messed up");
-  // }
+    Red,
+    Black
 
-  // This is a pure virtual function. Also
-  // called an abstract method.
-  virtual void print(std::ostream& os) const = 0;
-
-  // Returns the color of a card.
-  // virtual Color get_color() const {
-  //   throw std::logic_error("you done messed up");
-  // }
-
-  virtual Color get_color() const = 0;
 };
 
-// StandardCard *derives from Card.
-// Card is the *base class* (superclass/supertype)
-// StandardCard is the *derived class* (subclass/subtype).
-struct StandardCard : Card {
-  StandardCard(Rank r, Suit s)
-    : rank(r), suit(s)
-  { }
+class Card
+{
+    public:
 
-  // This is an override (not an overwrite) of
-  // the virtual function in Card.
+        // Returns the rank. The "const" guarantees
+        // that the function does not modify the data
+        // members of the class (or call any other
+        // member function that does).
+        // This is an accessor function, or getter, or
+        // observer.
+        Card(Rank r, Suit s) : bits((unsigned)s << 4 | (unsigned)r) { } //Casting for unsigned integers
+        Rank getRank() const { return(Rank) (0b00001111 & bits); } //LSB of 8-bit number
+        Suit getSuit() const { return(Suit) ((0b11110000 & bits) >> 4); } //MSB of 8-bit number
+        bool operator==(Card c) { return bits == c.bits; }  //Overload operators with bits
+        bool operator!=(Card c) { return !(bits == c.bits); }
+        friend bool operator<(Card a, Card b) { return a.getRank() < b.getRank(); }
+        friend bool operator>(Card a, Card b) { return b.getRank() < a.getRank(); }
+        friend bool operator<=(Card a, Card b) { return !(b.getRank() < a.getRank()); }
+        friend bool operator>=(Card a, Card b) { return !(a.getRank() < b.getRank()); }
 
-  void print(std::ostream& os) const override;
-
-  // Override.
-  Color get_color() const override {
-    return static_cast<Color>(suit > Diamonds);
-  }
-
-  Rank rank;
-  Suit suit;
+    private:
+        Rank rank;
+        Suit suit;
+        unsigned char bits;
 };
 
-struct JokerCard : Card {
-  JokerCard(Color c)
-    : color(c)
-  { }
+class Joker
+{
+    Color color;
 
-  // An override for jokers.
-  void print(std::ostream& os) const override;
-
-  // Override
-  Color get_color() const override {
-    return color;
-  }
-
-  Color color;
+    public:
+    Joker(Color cl) : color(cl) { }
+    Color getColor() const { return color; }
 };
 
 
+union PlayCardUni
+{
+    Card standCard;
+    Joker jokerCard;
 
-std::ostream& operator<<(std::ostream& os, Suit s);
-std::ostream& operator<<(std::ostream& os, Rank r);
-std::ostream& operator<<(std::ostream& os, Color c);
-std::ostream& operator<<(std::ostream& os, StandardCard const& c);
-std::ostream& operator<<(std::ostream& os, JokerCard const& c);
-std::ostream& operator<<(std::ostream& os, Card const& c);
-std::ostream& operator<<(std::ostream& os, Deck const& d);
+    PlayCardUni(Rank r, Suit s) : standCard(r, s) { }
+    PlayCardUni(Color cl) : jokerCard(cl) { }
+};
+
+class PlayingCard
+{
+    Kind kin;
+    PlayCardUni playCardUni;
+
+public:
+    PlayingCard(Rank r, Suit s) : kin(StandKind), playCardUni(r, s) { }
+    PlayingCard(Color cl) : kin(JokerKind), playCardUni(cl) { }
+    bool isStandCard() const { return kin == StandKind; }
+    bool isJokerCard() const { return kin == JokerKind; }
+    //Get function for rank
+    Rank getRank() const
+    {
+        assert(isStandCard());
+
+        return playCardUni.standCard.getRank();
+    }
+    //Get function for suit
+    Suit getSuit() const
+    {
+        assert(isStandCard());
+
+        return playCardUni.standCard.getSuit();
+    }
+    //Get function for colour
+    Color getColor() const
+    {
+        assert(isJokerCard());
+
+        return playCardUni.jokerCard.getColour();
+    }
+    //Get function for Standard card
+    Card getStandardCard() const
+    {
+        assert(isStandCard());
+
+        return playCardUni.standCard;
+    }
+    //Get function for Joker card
+    Joker getJokerCard() const
+    {
+        assert(isJokerCard());
+
+        return playCardUni.jokerCard;
+    }
+};
+
+class Game
+{
+    public:
+        Game() = default;
+        void warGame(int);
+
+    private:
+        int Player1, Player2;
+};
+
+struct Deck : std::deque<Card>
+{
+    using std::deque<Card>::deque;
+};
+
+//Overloads the ostream operators
+std::ostream& operator<<(std::ostream& out, Suit s);
+std::ostream& operator<<(std::ostream& out, Rank r);
+std::ostream& operator<<(std::ostream& out, Card c);
+std::ostream& operator<<(std::ostream& out, Deck const& d);
