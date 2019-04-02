@@ -6,7 +6,7 @@
 
 struct Post
 {
-    int numComments;
+    int numOfComments;
     int upvotes;
     int downvotes;
     std::string title;

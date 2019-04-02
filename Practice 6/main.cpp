@@ -86,3 +86,4 @@ int main()
             std::cout << "Upvotes: " << postVec[i].upvotes << " Downvotes: " << postVec[i].downvotes << " Number of Comments: " << postVec[i].numOfComments << std::endl << std::endl;
         }
     }
+}
