@@ -42,8 +42,6 @@ void windows::Tick()
       num = i;
 }
 
-//Precondition:     This function takes in no parameters.
-//Postcondition:    This function returns void and creates the game window.
 void Windows::CreateWindow()
 {
     //Generate a random number
