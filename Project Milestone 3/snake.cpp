@@ -46,12 +46,6 @@ void windows::Tick()
 //Postcondition:    This function returns void and creates the game window.
 void Windows::CreateWindow()
 {
-    sf::Music music;
-
-    //Check to see if music file was loaded properly
-    if(!music.openFromFile("/Users/Turner/Desktop/Snake/images/Seed.wav"))
-        std::cout << "Error Loading Music" << std::endl;
-
     //Generate a random number
     srand(static_cast<unsigned int>(time(NULL)));
 
