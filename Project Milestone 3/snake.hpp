@@ -1,11 +1,11 @@
 //Anthony Tung
+//Milestone 3
 
 #ifndef SNAKE_HPP_INCLUDED
 #define SNAKE_HPP_INCLUDED
 
 
 #include <stdio.h>
-#include "main.cpp"
 
 
 class windows{
