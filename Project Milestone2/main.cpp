@@ -3,7 +3,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <time.h>
-#include "Windows.hpp"
+#include "snake.hpp"
 
 
 //Main function allows the game to run
