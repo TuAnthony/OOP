@@ -1,6 +1,8 @@
 //Anthony Tung
 
 #include <iostream>
+#include <SFML/Graphics.hpp>
+#include <time.h>
 #include "snake.hpp"
 
 using namespace sf;
