@@ -1,12 +1,12 @@
 //Anthony Tung
-//Milestone 3
+//OOP Milestone 3
 
 #include <iostream>
 #include "snake.hpp"
 
 using namespace sf;
 
-//function allows the snake to move around using coordinates
+// Function allows the snake to move around using coordinates
 void windows::Tick()
 {
   for (int i = num; i > 0; --i) {
