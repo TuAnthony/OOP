@@ -51,7 +51,7 @@ void Windows::CreateWindow()
 
     //Create a game Window
     sf::RenderWindow window(sf::VideoMode(width, height), "Snake");
-    sf::Texture text1, text2, text3, text4, text5, text6;
+    sf::Texture text1, text2, text3, text4, text5, text6, text7;
 
     // Loads images used for snake game, and 4 new colors were added
     text1.loadFromFile("/Users/Anthony/Desktop/Snake/images/white.png");
