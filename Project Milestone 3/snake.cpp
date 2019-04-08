@@ -1,8 +1,11 @@
 //Anthony Tung
 //OOP Milestone 3
 
-#include <iostream>
 #include "snake.hpp"
+#include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <time.h>
 
 using namespace sf;
 
