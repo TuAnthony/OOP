@@ -2,7 +2,6 @@
 //OOP Milestone 3
 
 #include "snake.hpp"
-#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <time.h>
