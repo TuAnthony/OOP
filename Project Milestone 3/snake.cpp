@@ -51,17 +51,18 @@ void Windows::CreateWindow()
 
     //Create a game Window
     sf::RenderWindow window(sf::VideoMode(width, height), "Snake");
-    sf::Texture texture1, texture2, texture3, texture4, texture5, texture6;
+    sf::Texture text1, text2, text3, text4, text5, text6;
 
-    // Loads images used for snake game, and new colors were added
-    texture1.loadFromFile("/Users/Anthony/Desktop/Snake/images/red.png");
-    texture2.loadFromFile("/Users/Anthony/Desktop/Snake/images/white.png");
-    texture3.loadFromFile("/Users/Anthony/Desktop/Snake/images/maroon.png");
-    texture4.loadFromFile("/Users/Anthony/Desktop/Snake/images/purple.png");
-    texture5.loadFromFile("/Users/Anthony/Desktop/Snake/images/yellow.png");
-    texture6.loadFromFile("/Users/Anthony/Desktop/Snake/images/blue.png");
+    // Loads images used for snake game, and 4 new colors were added
+    text1.loadFromFile("/Users/Anthony/Desktop/Snake/images/white.png");
+    text2.loadFromFile("/Users/Anthony/Desktop/Snake/images/red.png");
+    text3.loadFromFile("/Users/Anthony/Desktop/Snake/images/maroon.png");
+    text4.loadFromFile("/Users/Anthony/Desktop/Snake/images/purple.png");
+    text5.loadFromFile("/Users/Anthony/Desktop/Snake/images/yellow.png");
+    text6.loadFromFile("/Users/Anthony/Desktop/Snake/images/blue.png");
+    text7.loadFromFile("/Users/Anthony/Desktop/Snake/images/green.png");
 
-    sf::Sprite sprite1(texture1), sprite2(texture2), sprite3(texture3), sprite4(texture4), sprite5(texture5), sprite6(texture6);
+    sf::Sprite sprite1(text1), sprite2(text2), sprite3(text3), sprite4(text4), sprite5(text5), sprite6(text6), sprite7(text7);
     sf::Clock clock;
 
     f.x = 10;
@@ -113,7 +114,7 @@ void Windows::CreateWindow()
             window.draw(sprite2);
         }
 
-        var = num % 5;
+        var = num % 6;
 
         //The time will depend on the length of snake
         switch(var)
@@ -140,10 +141,14 @@ void Windows::CreateWindow()
                 window.draw(sprite6);
                 decision = true;
                 break;
-            case 0:
             case 5:
                 sprite2.setPosition(f.x * size, f.y * size);
                 window.draw(sprite2);
+                decision = true;
+                break;
+            case 6:
+                sprite7.setPosition(f.x * size, f.y * size);
+                window.draw(sprite7);
                 decision = true;
                 break;
         }
