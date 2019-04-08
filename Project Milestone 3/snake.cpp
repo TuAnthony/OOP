@@ -1,5 +1,5 @@
-//Anthony Tung
-//OOP Milestone 3
+// Anthony Tung
+// OOP Milestone 3
 
 #include "snake.hpp"
 #include <SFML/Graphics.hpp>
