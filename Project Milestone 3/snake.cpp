@@ -43,19 +43,17 @@ void windows::Tick()
       num = i;
 }
 
-// Function takes in no parameters, loads in the texture from the file that was originally provided, and this function creates
-// the game window.
+// Function loads in the texture from the file that was originally provided, and this function creates the game window.
 void Windows::CreateWindow()
 {
     //Generate a random number
     srand(static_cast<unsigned int>(time(NULL)));
 
-    //Create the game Window
+    //Create a game Window
     sf::RenderWindow window(sf::VideoMode(width, height), "Snake");
     sf::Texture texture1, texture2, texture3, texture4, texture5, texture6;
 
-    //Load the images used for the game
-    //Four colours were added
+    // Loads images used for snake game, and new colors were added
     texture1.loadFromFile("/Users/Anthony/Desktop/Snake/images/red.png");
     texture2.loadFromFile("/Users/Anthony/Desktop/Snake/images/white.png");
     texture3.loadFromFile("/Users/Anthony/Desktop/Snake/images/maroon.png");
@@ -85,7 +83,7 @@ void Windows::CreateWindow()
         if(event.type == sf::Event::Closed)
             window.close();
 
-        //Create the keyboard controls which were provided in the original code
+        //Keyboard controls which were provided in the original code
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
             dir = 1;
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
