@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 
-class windows
+class Windows
 {
     const int N = 30;
     const int M = 20;
