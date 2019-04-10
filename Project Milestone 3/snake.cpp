@@ -14,40 +14,40 @@ struct Graph { int x, y; } f;
 
 
 // Function allows the snake to move around using coordinates
-void windows::Tick()
+void Windows::Tick()
 {
-  for (int i = num; i > 0; --i) {
-    s[i].x = s[i - 1].x;
-    s[i].y = s[i - 1].y;
-  }
-
-  if (dir == 0)
-    s[0].y += 1;
-  if (dir == 1)
-    s[0].x -= 1;
-  if (dir == 2)
-    s[0].x += 1;
-  if (dir == 3)
-    s[0].y -= 1;
-
-  if ((s[0].x == f.x) && (s[0].y == f.y)) {
-    num++;
-    f.x = rand() % N;
-    f.y = rand() % M;
-  }
-
-  if (s[0].x > N)
-    s[0].x = 0;
-  if (s[0].x < 0)
-    s[0].x = N;
-  if (s[0].y > M)
-    s[0].y = 0;
-  if (s[0].y < 0)
-    s[0].y = M;
-
-  for (int i = 1; i < num; i++)
-    if (s[0].x == s[i].x && s[0].y == s[i].y)
-      num = i;
+    for (int counter = num; counter > 0; --counter)
+    {
+        s[counter].x = s[counter - 1].x;
+        s[counter].y = s[counter - 1].y;
+    }
+    
+    if(dir == 0)
+        s[0].y += 1;
+    if(dir == 1)
+        s[0].x -= 1;
+    if(dir == 2)
+        s[0].x += 1;
+    if(dir == 3)
+        s[0].y -= 1;
+    if((s[0].x == f.x) && (s[0].y == f.y))
+    {
+        num++;
+        f.x = rand() % N;
+        f.y = rand() % M;
+    }
+    if(s[0].x > N)
+        s[0].x = 0;
+    if(s[0].x < 0)
+        s[0].x = N;
+    if(s[0].y > M)
+        s[0].y = 0;
+    if(s[0].y < 0)
+        s[0].y = M;
+    
+    for(int counter = 1; counter < num; ++counter)
+        if(s[0].x == s[counter].x && s[0].y == s[counter].y)
+            num = counter;
 }
 
 // Function loads in the texture from the file that was originally provided, and this function creates the game window.
