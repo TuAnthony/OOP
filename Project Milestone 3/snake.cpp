@@ -8,6 +8,11 @@
 
 using namespace sf;
 
+//Moved from main.cpp to here
+struct Snake { int x, y; } s[100];
+struct Graph { int x, y; } f;
+
+
 // Function allows the snake to move around using coordinates
 void windows::Tick()
 {
