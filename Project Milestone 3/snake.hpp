@@ -4,9 +4,7 @@
 #ifndef SNAKE_HPP_INCLUDED
 #define SNAKE_HPP_INCLUDED
 
-
 #include <stdio.h>
-
 
 class Windows
 {
