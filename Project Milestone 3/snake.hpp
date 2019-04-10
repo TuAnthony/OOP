@@ -8,8 +8,8 @@
 #include <stdio.h>
 
 
-class windows{
-
+class windows
+{
     const int N = 30;
     const int M = 20;
     const int size = 16, width = size * N, height = size * M;
